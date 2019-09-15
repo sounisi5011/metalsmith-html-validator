@@ -1,3 +1,4 @@
+import createDebug from 'debug';
 import path from 'path';
 import onExit from 'signal-exit';
 import vnuJar from 'vnu-jar';
@@ -10,6 +11,8 @@ import {
     tmpDirAsync,
 } from './utils';
 import { FileInterface, writeFilesAsync } from './utils/metalsmith';
+
+const debug = createDebug(require('../package.json').name).extend('validator');
 
 /**
  * @see https://github.com/validator/validator/wiki/Output-»-JSON
@@ -79,12 +82,15 @@ export async function validateFiles(
     const tmpDir = await tmpDirAsync({ prefix: `metalsmith-html-validator-` });
     const removeExitListener = onExit(() => {
         try {
+            debug('deleting a temporary directory by Signal Event: %o', tmpDir);
             removeForceSync(tmpDir);
         } catch (error) {
             console.error(error);
         }
     });
+    debug('created a temporary directory: %o', tmpDir);
 
+    debug('writing files to temporary directory: %o', tmpDir);
     await writeFilesAsync(files, tmpDir);
 
     const result = await promiseFinally(
@@ -98,6 +104,7 @@ export async function validateFiles(
             tmpDir,
         ]),
         async () => {
+            debug('deleting a temporary directory: %o', tmpDir);
             await removeForceAsync(tmpDir);
             removeExitListener();
         },

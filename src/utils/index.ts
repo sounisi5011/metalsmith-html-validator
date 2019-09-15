@@ -1,7 +1,12 @@
 import childProcess from 'child_process';
 import spawn from 'cross-spawn';
+import createDebug from 'debug';
 import rimraf from 'rimraf';
+import shellescape from 'shell-escape';
 import tmp from 'tmp';
+
+const debug = createDebug(require('../../package.json').name);
+const execDebug = debug.extend('exec');
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export function isObject(value: unknown): value is Record<any, unknown> {
@@ -98,6 +103,11 @@ export async function exec(
 ): Promise<{ stdout: Buffer; stderr: Buffer; status: number; signal: string }> {
     return new Promise((resolve, reject) => {
         const { input, ...opts } = options || {};
+
+        execDebug(
+            `starting vnu.jar: %s`,
+            shellescape([command, ...(args || [])]),
+        );
         const process = spawn(command, args && [...args], options && opts);
         const stdoutList: Buffer[] = [];
         const stderrList: Buffer[] = [];
@@ -126,6 +136,8 @@ export async function exec(
         process.on('error', error => {
             reject(error);
         });
+
+        execDebug('vnu.jar started: pid=%d', process.pid);
 
         if (process.stdin && (typeof input === 'string' || input)) {
             process.stdin.write(input);

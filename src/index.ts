@@ -1,3 +1,4 @@
+import createDebug from 'debug';
 import Metalsmith from 'metalsmith';
 
 import {
@@ -12,6 +13,8 @@ import {
     isFile,
 } from './utils/metalsmith';
 import { validateContent, validateFiles, VNuMessage } from './validator';
+
+const debug = createDebug(require('../package.json').name);
 
 function message2str(message: VNuMessage): string {
     return [
@@ -63,6 +66,12 @@ export = (
             return;
         }
 
+        debug(
+            'validate %d files: %o',
+            targetFilenameList.length,
+            targetFilenameList,
+        );
+
         const { data, filenameMap } = await (targetFilenameList.length > 1
             ? validateFiles(
                   targetFilenameList.reduce<Metalsmith.Files>(
@@ -83,6 +92,8 @@ export = (
                     message.type === 'non-document-error',
             )
         ) {
+            debug('detect invalid HTML');
+
             const messagesMap = data.messages.reduce((map, message) => {
                 const path = filenameMap.get(message) || message.url || '';
                 map.set(path, [...(map.get(path) || []), message]);
