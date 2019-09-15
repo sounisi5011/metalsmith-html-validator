@@ -22,7 +22,10 @@ test('should throw error by invalid html', async t => {
         .source('src')
         .use(htmlValidator());
 
-    await t.throwsAsync(async () => {
+    const error = await t.throwsAsync(async () => {
         await processAsync(metalsmith);
     });
+
+    t.regex(error.message, /^frameset\.html:$/m);
+    t.regex(error.message, /^non-utf8\.html:$/m);
 });
