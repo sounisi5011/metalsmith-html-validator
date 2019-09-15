@@ -86,14 +86,18 @@ export = (
                 return map;
             }, new Map<string, VNuMessage[]>());
 
-            throw new Error(
+            const error = new Error('Some files are invalid HTML');
+            const stack = error.stack;
+            error.message +=
+                '\n\n' +
                 [...messagesMap.entries()]
                     .sort(([a], [b]) => compareUnicode(a, b))
                     .map(([path, messages]) =>
                         [`${path}:`, ...messages.map(message2str)].join('\n\n'),
                     )
-                    .join('\n\n'),
-            );
+                    .join('\n\n');
+            error.stack = stack;
+            throw error;
         }
     });
 };
