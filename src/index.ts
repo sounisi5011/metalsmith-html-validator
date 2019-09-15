@@ -5,7 +5,7 @@ import {
     OptionsGenerator,
     OptionsInterface,
 } from './options';
-import { compareUnicode, hasProp, isString } from './utils';
+import { compareUnicode, hasProp } from './utils';
 import {
     createPlugin,
     getMatchedFilenameList,
@@ -19,27 +19,30 @@ function message2str(message: VNuMessage): string {
             message.type +
             (hasProp(message, 'subType') ? `/${message.subType}` : '') +
             (hasProp(message, 'message') ? `: ${message.message}` : ''),
-        hasProp(message, 'firstLine') ||
+        ...(hasProp(message, 'firstLine') ||
         hasProp(message, 'firstColumn') ||
         hasProp(message, 'lastLine') ||
         hasProp(message, 'lastColumn')
-            ? '  ' +
-              (hasProp(message, 'firstColumn') && hasProp(message, 'lastColumn')
-                  ? `From line ${
-                        hasProp(message, 'firstLine')
-                            ? message.firstLine
-                            : message.lastLine
-                    }, column ${message.firstColumn}; to line ${
-                        message.lastLine
-                    }, column ${message.lastColumn}`
-                  : `At line ${message.lastLine}, column ${message.lastColumn}`)
-            : null,
+            ? [
+                  '',
+                  '  ' +
+                      (hasProp(message, 'firstColumn') &&
+                      hasProp(message, 'lastColumn')
+                          ? `From line ${
+                                hasProp(message, 'firstLine')
+                                    ? message.firstLine
+                                    : message.lastLine
+                            }, column ${message.firstColumn}; to line ${
+                                message.lastLine
+                            }, column ${message.lastColumn}`
+                          : `At line ${message.lastLine}, column ${message.lastColumn}`),
+              ]
+            : []),
         ...(hasProp(message, 'extract')
-            ? ['', message.extract.replace(/^/gm, '  > ')]
+            ? ['', message.extract.replace(/^(?!$)/gm, '  > ')]
             : []),
     ]
-        .filter(isString)
-        .map(line => line.replace(/^/gm, '  '))
+        .map(line => line.replace(/^(?!$)/gm, '  '))
         .join('\n');
 }
 
