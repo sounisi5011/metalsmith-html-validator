@@ -19,6 +19,11 @@ plugins:
   - simple-import-sort
 rules:
   no-dupe-class-members: off
+  import/no-extraneous-dependencies:
+    - error
+    - devDependencies:
+        - test/**
+        - script/**
   node/no-unsupported-features/es-syntax:
     - error
     - ignores:
