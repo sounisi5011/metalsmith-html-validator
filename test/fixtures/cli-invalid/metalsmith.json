@@ -1,0 +1,5 @@
+{
+  "plugins": {
+    "metalsmith-html-validator": true
+  }
+}
