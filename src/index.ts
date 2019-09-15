@@ -94,8 +94,11 @@ export = (
         ) {
             debug('detect invalid HTML');
 
+            const defaultPath =
+                targetFilenameList.length === 1 ? targetFilenameList[0] : '';
             const messagesMap = data.messages.reduce((map, message) => {
-                const path = filenameMap.get(message) || message.url || '';
+                const path =
+                    filenameMap.get(message) || message.url || defaultPath;
                 map.set(path, [...(map.get(path) || []), message]);
                 return map;
             }, new Map<string, VNuMessage[]>());
