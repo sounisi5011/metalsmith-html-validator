@@ -7,7 +7,7 @@ import htmlValidator = require('../src/index');
 
 const fixtures = path.join(__dirname, 'fixtures');
 
-test('should not throw error by valid html', async t => {
+test('should not throw error by valid html files', async t => {
     const metalsmith = Metalsmith(path.join(fixtures, 'valid'))
         .source('src')
         .use(htmlValidator());
@@ -17,7 +17,17 @@ test('should not throw error by valid html', async t => {
     });
 });
 
-test('should throw error by invalid html', async t => {
+test('should not throw error by valid single html file', async t => {
+    const metalsmith = Metalsmith(path.join(fixtures, 'valid-single'))
+        .source('src')
+        .use(htmlValidator());
+
+    await t.notThrowsAsync(async () => {
+        await processAsync(metalsmith);
+    });
+});
+
+test('should throw error by invalid html files', async t => {
     const metalsmith = Metalsmith(path.join(fixtures, 'invalid'))
         .source('src')
         .use(htmlValidator());
@@ -47,6 +57,30 @@ test('should throw error by invalid html', async t => {
             error.stack,
             /^non-utf8\.html:$/m,
             `The error object's "stack" property should not have an invalid HTML filenames`,
+        );
+    }
+});
+
+test('should throw error by invalid single html file', async t => {
+    const metalsmith = Metalsmith(path.join(fixtures, 'invalid-single'))
+        .source('src')
+        .use(htmlValidator());
+
+    const error = await t.throwsAsync(async () => {
+        await processAsync(metalsmith);
+    });
+
+    t.regex(
+        error.message,
+        /^empty-title\.html:$/m,
+        `The error object's "message" property should have an invalid HTML filename`,
+    );
+
+    if (error.stack) {
+        t.notRegex(
+            error.stack,
+            /^empty-title\.html:$/m,
+            `The error object's "stack" property should not have an invalid HTML filename`,
         );
     }
 });
