@@ -87,6 +87,11 @@
       "prettier-package-json --write",
       "sort-package-json",
       "git add"
+    ],
+    "src/schemas/vnu-jar.{json,ts}": [
+      "json2ts ./src/schemas/vnu-jar.json ./src/schemas/vnu-jar.d.ts",
+      "prettier --write ./src/schemas/vnu-jar.d.ts",
+      "git add ./src/schemas/vnu-jar.d.ts"
     ]
   },
   "dependencies": {
