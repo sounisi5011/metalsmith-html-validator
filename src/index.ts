@@ -82,7 +82,6 @@ export = (
                       }),
                       {},
                   ),
-                  ['--format', 'text'],
               )
             : validateContent(files[targetFilenameList[0]].contents));
 

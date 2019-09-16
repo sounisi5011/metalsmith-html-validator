@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-html-validator",
-  "version": "0.0.0",
-  "description": " ... ",
+  "version": "1.0.0",
+  "description": "Metalsmith plugin for HTML validation, using the Nu Html Checker (v.Nu)",
   "keywords": [
     "HTML",
     "Nu HTML Checker",
@@ -25,6 +25,14 @@
     "vnu",
     "w3c"
   ],
+  "homepage": "https://github.com/sounisi5011/metalsmith-html-validator#readme",
+  "bugs": {
+    "url": "https://github.com/sounisi5011/metalsmith-html-validator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sounisi5011/metalsmith-html-validator.git"
+  },
   "license": "MIT",
   "author": "sounisi5011",
   "main": "dist/index",
