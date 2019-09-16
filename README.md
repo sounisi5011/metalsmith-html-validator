@@ -6,7 +6,7 @@
 [![Build Status](https://travis-ci.com/sounisi5011/metalsmith-html-validator.svg?branch=master)](https://travis-ci.com/sounisi5011/metalsmith-html-validator)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/3fdd1f208cb3fb05faac/maintainability)](https://codeclimate.com/github/sounisi5011/metalsmith-html-validator/maintainability)
 
-[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v0.0.0/LICENSE
+[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/LICENSE
 
 ## Install
 
