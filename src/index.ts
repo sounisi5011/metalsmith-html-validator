@@ -6,17 +6,18 @@ import {
     OptionsGenerator,
     OptionsInterface,
 } from './options';
+import { VNuMessageObject } from './schemas/vnu-jar';
 import { compareUnicode, hasProp } from './utils';
 import {
     createPlugin,
     getMatchedFilenameList,
     isFile,
 } from './utils/metalsmith';
-import { validateContent, validateFiles, VNuMessage } from './validator';
+import { validateContent, validateFiles } from './validator';
 
 const debug = createDebug(require('../package.json').name);
 
-function message2str(message: VNuMessage): string {
+function message2str(message: VNuMessageObject): string {
     return [
         '* ' +
             message.type +
@@ -101,7 +102,7 @@ export = (
                     filenameMap.get(message) || message.url || defaultPath;
                 map.set(path, [...(map.get(path) || []), message]);
                 return map;
-            }, new Map<string, VNuMessage[]>());
+            }, new Map<string, VNuMessageObject[]>());
 
             const error = new Error('Some files are invalid HTML');
             const stack = error.stack;
