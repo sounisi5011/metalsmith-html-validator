@@ -27,9 +27,6 @@
   ],
   "license": "MIT",
   "author": "sounisi5011",
-  "files": [
-    "dist/"
-  ],
   "main": "dist/index",
   "types": "dist/index.d.ts",
   "directories": {
