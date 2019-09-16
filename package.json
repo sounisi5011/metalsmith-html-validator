@@ -25,6 +25,14 @@
     "vnu",
     "w3c"
   ],
+  "homepage": "https://github.com/sounisi5011/metalsmith-html-validator#readme",
+  "bugs": {
+    "url": "https://github.com/sounisi5011/metalsmith-html-validator/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sounisi5011/metalsmith-html-validator.git"
+  },
   "license": "MIT",
   "author": "sounisi5011",
   "main": "dist/index",
