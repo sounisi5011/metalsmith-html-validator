@@ -1,0 +1,90 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "vnu-jar.json",
+  "title": "v.Nu JSON Schema",
+  "definitions": {
+    "VNuMessageObject": {
+      "oneOf": [
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["info"] },
+            "subType": { "enum": ["warning"] },
+            "message": { "type": "string" },
+            "extract": { "type": "string" },
+            "offset": { "type": "integer", "minimum": 0 },
+            "url": { "type": "string", "pattern": "^file:(/[^/]+)+" },
+            "firstLine": { "type": "integer", "minimum": 1 },
+            "firstColumn": { "type": "integer", "minimum": 1 },
+            "lastLine": { "type": "integer", "minimum": 1 },
+            "lastColumn": { "type": "integer", "minimum": 1 },
+            "hiliteStart": { "type": "integer", "minimum": 0 },
+            "hiliteLength": { "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["error"] },
+            "subType": { "enum": ["fatal"] },
+            "message": { "type": "string" },
+            "extract": { "type": "string" },
+            "offset": { "type": "integer", "minimum": 0 },
+            "url": { "type": "string", "pattern": "^file:(/[^/]+)+" },
+            "firstLine": { "type": "integer", "minimum": 1 },
+            "firstColumn": { "type": "integer", "minimum": 1 },
+            "lastLine": { "type": "integer", "minimum": 1 },
+            "lastColumn": { "type": "integer", "minimum": 1 },
+            "hiliteStart": { "type": "integer", "minimum": 0 },
+            "hiliteLength": { "type": "integer", "minimum": 0 }
+          }
+        },
+        {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["type"],
+          "properties": {
+            "type": { "enum": ["non-document-error"] },
+            "subType": { "enum": ["io", "schema", "internal"] },
+            "message": { "type": "string" },
+            "extract": { "type": "string" },
+            "offset": { "type": "integer", "minimum": 0 },
+            "url": { "type": "string", "pattern": "^file:(/[^/]+)+" },
+            "firstLine": { "type": "integer", "minimum": 1 },
+            "firstColumn": { "type": "integer", "minimum": 1 },
+            "lastLine": { "type": "integer", "minimum": 1 },
+            "lastColumn": { "type": "integer", "minimum": 1 },
+            "hiliteStart": { "type": "integer", "minimum": 0 },
+            "hiliteLength": { "type": "integer", "minimum": 0 }
+          }
+        }
+      ]
+    },
+    "VNuSourceObject": {
+      "type": "object",
+      "required": ["code"],
+      "properties": {
+        "code": { "type": "string" },
+        "type": { "type": "string" },
+        "encoding": { "type": "string" }
+      },
+      "additionalProperties": false
+    }
+  },
+  "type": "object",
+  "required": ["messages"],
+  "properties": {
+    "messages": {
+      "type": "array",
+      "items": { "$ref": "#/definitions/VNuMessageObject" }
+    },
+    "url": { "type": "string", "format": "uri" },
+    "source": { "$ref": "#/definitions/VNuSourceObject" },
+    "language": { "type": "string" }
+  },
+  "additionalProperties": false
+}
