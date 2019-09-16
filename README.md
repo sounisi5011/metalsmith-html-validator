@@ -8,6 +8,11 @@
 
 [github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/LICENSE
 
+[Metalsmith] plugin for HTML validation, using the [Nu Html Checker (v.Nu)].
+
+[Metalsmith]: https://github.com/segmentio/metalsmith
+[Nu Html Checker (v.Nu)]: https://validator.github.io/validator/
+
 ## Install
 
 WIP

@@ -1,7 +1,7 @@
 {
   "name": "metalsmith-html-validator",
   "version": "1.0.0",
-  "description": " ... ",
+  "description": "Metalsmith plugin for HTML validation, using the Nu Html Checker (v.Nu)",
   "keywords": [
     "HTML",
     "Nu HTML Checker",
