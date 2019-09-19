@@ -2,7 +2,27 @@
 
 ## [Unreleased]
 
+### Features
+
+* [#8] - Show errors and warnings to console
+* [#8] - `logger` option
+* [#8] - `chalk` option
+
+### Added Dependencies
+
+#### dependencies
+
+* [#8] - `chalk@2.4.2`
+* [#8] - `supports-color@7.0.0`
+
+#### devDependencies
+
+* [#8] - `@types/has-ansi@3.0.0`
+* [#8] - `@types/supports-color@5.3.0`
+* [#8] - `has-ansi@4.0.0`
+
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...HEAD
+[#8]: https://github.com/sounisi5011/metalsmith-html-validator/pull/8
 
 ## [1.0.0] (2019-09-16 UTC)
 

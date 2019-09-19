@@ -1,3 +1,4 @@
+import { Chalk } from 'chalk';
 import createDebug from 'debug';
 import Metalsmith from 'metalsmith';
 
@@ -6,8 +7,8 @@ import {
     OptionsGenerator,
     OptionsInterface,
 } from './options';
-import { VNuMessageObject } from './schemas/vnu-jar';
-import { compareUnicode, hasProp } from './utils';
+import { VNuJSONSchema, VNuMessageObject } from './schemas/vnu-jar';
+import { compareUnicode, hasProp, replaceLine } from './utils';
 import {
     createPlugin,
     getMatchedFilenameList,
@@ -17,11 +18,62 @@ import { validateContent, validateFiles } from './validator';
 
 const debug = createDebug(require('../package.json').name);
 
-function message2str(message: VNuMessageObject): string {
+function hiliteExtract(
+    message: VNuMessageObject,
+    chalkCtx: Chalk | null,
+): string {
+    if (!hasProp(message, 'extract')) {
+        return '';
+    }
+
+    if (hasProp(message, 'hiliteStart') || hasProp(message, 'hiliteLength')) {
+        const {
+            extract,
+            hiliteStart = 0,
+            hiliteLength = extract.length,
+        } = message;
+        const hiliteEnd = hiliteStart + hiliteLength;
+        const hiliteExtract = extract.substring(hiliteStart, hiliteEnd);
+        return (
+            extract.substring(0, hiliteStart) +
+            (chalkCtx
+                ? replaceLine(hiliteExtract, chalkCtx.yellowBright.inverse)
+                : hiliteExtract) +
+            extract.substring(hiliteEnd)
+        );
+    } else {
+        return message.extract;
+    }
+}
+
+function message2str(
+    message: VNuMessageObject,
+    chalkCtx: Chalk | null,
+): string {
+    let typeColor = (text: string): string => text;
+    if (chalkCtx) {
+        switch (message.type) {
+            case 'info':
+                typeColor =
+                    message.subType === 'warning'
+                        ? chalkCtx.yellow
+                        : chalkCtx.cyan;
+                break;
+            case 'error':
+                typeColor = chalkCtx.red;
+                break;
+            case 'non-document-error':
+                typeColor = chalkCtx.red.bgBlack.bold;
+                break;
+        }
+    }
+
     return [
         '* ' +
-            message.type +
-            (hasProp(message, 'subType') ? `/${message.subType}` : '') +
+            typeColor(
+                message.type +
+                    (hasProp(message, 'subType') ? `/${message.subType}` : ''),
+            ) +
             (hasProp(message, 'message') ? `: ${message.message}` : ''),
         ...(hasProp(message, 'firstLine') ||
         hasProp(message, 'firstColumn') ||
@@ -43,11 +95,37 @@ function message2str(message: VNuMessageObject): string {
               ]
             : []),
         ...(hasProp(message, 'extract')
-            ? ['', message.extract.replace(/^(?!$)/gm, '  > ')]
+            ? ['', hiliteExtract(message, chalkCtx).replace(/^(?!$)/gm, '  > ')]
             : []),
     ]
         .map(line => line.replace(/^(?!$)/gm, '  '))
         .join('\n');
+}
+
+function vnuData2text(
+    data: VNuJSONSchema,
+    options: {
+        getPath: (message: VNuMessageObject) => string;
+        chalkCtx: Chalk | null;
+    },
+): string {
+    const messagesMap = data.messages.reduce((map, message) => {
+        const path = options.getPath(message);
+        map.set(path, [...(map.get(path) || []), message]);
+        return map;
+    }, new Map<string, VNuMessageObject[]>());
+
+    return [...messagesMap.entries()]
+        .sort(([a], [b]) => compareUnicode(a, b))
+        .map(([path, messages]) =>
+            [
+                `${path}:`,
+                ...messages.map(message =>
+                    message2str(message, options.chalkCtx),
+                ),
+            ].join('\n\n'),
+        )
+        .join('\n\n');
 }
 
 export = (
@@ -73,17 +151,33 @@ export = (
             targetFilenameList,
         );
 
-        const { data, filenameMap } = await (targetFilenameList.length > 1
-            ? validateFiles(
-                  targetFilenameList.reduce<Metalsmith.Files>(
-                      (obj, filename) => ({
-                          ...obj,
-                          [filename]: files[filename],
-                      }),
-                      {},
-                  ),
-              )
-            : validateContent(files[targetFilenameList[0]].contents));
+        const [{ data, filenameMap }, defaultPath] =
+            targetFilenameList.length > 1
+                ? [
+                      await validateFiles(
+                          targetFilenameList.reduce<Metalsmith.Files>(
+                              (obj, filename) => ({
+                                  ...obj,
+                                  [filename]: files[filename],
+                              }),
+                              {},
+                          ),
+                      ),
+                      '',
+                  ]
+                : [
+                      await validateContent(
+                          files[targetFilenameList[0]].contents,
+                      ),
+                      targetFilenameList[0],
+                  ];
+
+        const result = vnuData2text(data, {
+            getPath: message =>
+                filenameMap.get(message) || message.url || defaultPath,
+            chalkCtx: options.chalk || null,
+        });
+        options.logger(result);
 
         if (
             data.messages.some(
@@ -93,28 +187,7 @@ export = (
             )
         ) {
             debug('detect invalid HTML');
-
-            const defaultPath =
-                targetFilenameList.length === 1 ? targetFilenameList[0] : '';
-            const messagesMap = data.messages.reduce((map, message) => {
-                const path =
-                    filenameMap.get(message) || message.url || defaultPath;
-                map.set(path, [...(map.get(path) || []), message]);
-                return map;
-            }, new Map<string, VNuMessageObject[]>());
-
-            const error = new Error('Some files are invalid HTML');
-            const stack = error.stack;
-            error.message +=
-                '\n\n' +
-                [...messagesMap.entries()]
-                    .sort(([a], [b]) => compareUnicode(a, b))
-                    .map(([path, messages]) =>
-                        [`${path}:`, ...messages.map(message2str)].join('\n\n'),
-                    )
-                    .join('\n\n');
-            error.stack = stack;
-            throw error;
+            throw new Error('Some files are invalid HTML');
         }
     });
 };

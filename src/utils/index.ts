@@ -20,6 +20,13 @@ export function hasProp<
     return Object.prototype.hasOwnProperty.call(value, prop);
 }
 
+export function replaceLine(
+    str: string,
+    replaceFunc: (line: string) => string,
+): string {
+    return str.replace(/.+/g, line => replaceFunc(line));
+}
+
 export function compareUnicode(a: string, b: string): number {
     const aChars = [...a];
     const bChars = [...b];

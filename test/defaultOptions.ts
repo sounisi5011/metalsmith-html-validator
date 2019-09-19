@@ -45,7 +45,11 @@ test('defaultOptions cannot be changed', async t => {
                     'Child properties cannot be changed',
                 );
 
-                return {};
+                return {
+                    // disable display to stderr
+                    // eslint-disable-next-line @typescript-eslint/no-empty-function
+                    logger() {},
+                };
             }),
         );
     await processAsync(metalsmith);
