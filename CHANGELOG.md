@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+[Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+
+## [1.1.0] (2019-09-19 UTC)
+
 ### Features
 
 * [#8] - Show errors and warnings to console
@@ -36,7 +40,7 @@
 
 * [#9] - Improve test speed
 
-[Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...HEAD
+[1.1.0]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...v1.1.0
 [#5]: https://github.com/sounisi5011/metalsmith-html-validator/pull/5
 [#6]: https://github.com/sounisi5011/metalsmith-html-validator/pull/6
 [#8]: https://github.com/sounisi5011/metalsmith-html-validator/pull/8
