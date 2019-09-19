@@ -4,13 +4,13 @@
 [![License: MIT](https://img.shields.io/static/v1?label=license&message=MIT&color=green)][github-license]
 ![Supported Node version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
 ![Type Definitions: TypeScript](https://img.shields.io/npm/types/metalsmith-html-validator.svg)
-[![bundle size](https://badgen.net/bundlephobia/min/metalsmith-html-validator@1.0.0)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.0.0)
+[![bundle size](https://badgen.net/bundlephobia/min/metalsmith-html-validator@1.1.0)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.0)
 [![Dependencies Status](https://david-dm.org/sounisi5011/metalsmith-html-validator/status.svg)](https://david-dm.org/sounisi5011/metalsmith-html-validator)
 [![Build Status](https://travis-ci.com/sounisi5011/metalsmith-html-validator.svg?branch=master)](https://travis-ci.com/sounisi5011/metalsmith-html-validator)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/3fdd1f208cb3fb05faac/maintainability)](https://codeclimate.com/github/sounisi5011/metalsmith-html-validator/maintainability)
 
 [npm]: https://www.npmjs.com/package/metalsmith-html-validator
-[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/LICENSE
+[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/LICENSE
 
 [Metalsmith] plugin for HTML validation, using the [Nu Html Checker (v.Nu)].
 
@@ -107,7 +107,7 @@ metalsmith
 
 ## Options
 
-The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/src/options.ts#L16-L18) like this:
+The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L16-L18) like this:
 
 ```js
 {
@@ -123,13 +123,13 @@ Pattern are verified using [multimatch v4.0.0][npm-multimatch-used].
 
 [npm-multimatch-used]: https://www.npmjs.com/package/multimatch/v/4.0.0
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/src/options.ts#L17)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L17)):
 
 ```js
 ['**/*.{html,htm}']
 ```
 
-Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.0.0/src/options.ts#L5)):
+Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L5)):
 
 ```ts
 string | string[]
