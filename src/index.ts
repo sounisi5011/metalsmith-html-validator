@@ -1,3 +1,4 @@
+import chalk from 'chalk';
 import createDebug from 'debug';
 import Metalsmith from 'metalsmith';
 
@@ -7,7 +8,7 @@ import {
     OptionsInterface,
 } from './options';
 import { VNuJSONSchema, VNuMessageObject } from './schemas/vnu-jar';
-import { compareUnicode, hasProp } from './utils';
+import { compareUnicode, hasProp, replaceLine } from './utils';
 import {
     createPlugin,
     getMatchedFilenameList,
@@ -17,11 +18,52 @@ import { validateContent, validateFiles } from './validator';
 
 const debug = createDebug(require('../package.json').name);
 
+function hiliteExtract(message: VNuMessageObject): string {
+    if (!hasProp(message, 'extract')) {
+        return '';
+    }
+
+    if (hasProp(message, 'hiliteStart') || hasProp(message, 'hiliteLength')) {
+        const {
+            extract,
+            hiliteStart = 0,
+            hiliteLength = extract.length,
+        } = message;
+        const hiliteEnd = hiliteStart + hiliteLength;
+        return (
+            extract.substring(0, hiliteStart) +
+            replaceLine(
+                extract.substring(hiliteStart, hiliteEnd),
+                chalk.yellowBright.inverse,
+            ) +
+            extract.substring(hiliteEnd)
+        );
+    } else {
+        return message.extract;
+    }
+}
+
 function message2str(message: VNuMessageObject): string {
+    let typeColor = (text: string): string => text;
+    switch (message.type) {
+        case 'info':
+            typeColor =
+                message.subType === 'warning' ? chalk.yellow : chalk.cyan;
+            break;
+        case 'error':
+            typeColor = chalk.red;
+            break;
+        case 'non-document-error':
+            typeColor = chalk.red.bgBlack.bold;
+            break;
+    }
+
     return [
         '* ' +
-            message.type +
-            (hasProp(message, 'subType') ? `/${message.subType}` : '') +
+            typeColor(
+                message.type +
+                    (hasProp(message, 'subType') ? `/${message.subType}` : ''),
+            ) +
             (hasProp(message, 'message') ? `: ${message.message}` : ''),
         ...(hasProp(message, 'firstLine') ||
         hasProp(message, 'firstColumn') ||
@@ -43,7 +85,7 @@ function message2str(message: VNuMessageObject): string {
               ]
             : []),
         ...(hasProp(message, 'extract')
-            ? ['', message.extract.replace(/^(?!$)/gm, '  > ')]
+            ? ['', hiliteExtract(message).replace(/^(?!$)/gm, '  > ')]
             : []),
     ]
         .map(line => line.replace(/^(?!$)/gm, '  '))
