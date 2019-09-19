@@ -4,6 +4,7 @@ import Metalsmith from 'metalsmith';
 import path from 'path';
 
 import schema from '../../src/schemas/vnu-jar.json';
+import { isFile } from '../../src/utils/metalsmith';
 import { validateContent, validateFiles } from '../../src/validator';
 import { childdirList } from '../helpers';
 import { readAsync } from '../helpers/metalsmith';
@@ -14,6 +15,7 @@ const validate = ajv.compile(schema);
 
 test('The JSON output by vnu.jar should be in the expected format', async t => {
     const queue: (() => Promise<void>)[] = [];
+    const queuedBufSet: Buffer[] = [];
 
     await Promise.all(
         (await childdirList(fixtures))
@@ -33,10 +35,18 @@ test('The JSON output by vnu.jar should be in the expected format', async t => {
                 });
 
                 for (const [filename, filedata] of Object.entries(files)) {
+                    if (!isFile(filedata)) {
+                        continue;
+                    }
+
+                    const { contents } = filedata;
+                    if (queuedBufSet.some(buf => buf.equals(contents))) {
+                        continue;
+                    }
+
+                    queuedBufSet.push(contents);
                     queue.push(async () => {
-                        const { data } = await validateContent(
-                            filedata.contents,
-                        );
+                        const { data } = await validateContent(contents);
                         if (validate(data)) {
                             t.pass(`fixtures/${dirname}/src/${filename} file`);
                         } else {
