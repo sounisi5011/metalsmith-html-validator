@@ -21,7 +21,7 @@ test.before(async () => {
 test('should work with Metalsmith CLI', async t => {
     await t.notThrowsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'cli-valid'),
+            cwd: path.join(fixtures, 'valid'),
         }),
     );
 });
@@ -29,7 +29,7 @@ test('should work with Metalsmith CLI', async t => {
 test('should not work with Metalsmith CLI', async t => {
     const error = await t.throwsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'cli-invalid'),
+            cwd: path.join(fixtures, 'invalid'),
         }),
     );
 
