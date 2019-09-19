@@ -8,6 +8,13 @@
 * [#8] - `logger` option
 * [#8] - `chalk` option
 
+### Updated Dependencies
+
+#### devDependencies
+
+* `eslint-plugin-prettier`
+    * [#6] - `3.1.0` -> `3.1.1`
+
 ### Added Dependencies
 
 #### dependencies
@@ -26,6 +33,7 @@
 * [#9] - Improve test speed
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...HEAD
+[#6]: https://github.com/sounisi5011/metalsmith-html-validator/pull/6
 [#8]: https://github.com/sounisi5011/metalsmith-html-validator/pull/8
 [#9]: https://github.com/sounisi5011/metalsmith-html-validator/pull/9
 
