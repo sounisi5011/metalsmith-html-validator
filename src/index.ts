@@ -1,4 +1,4 @@
-import chalk from 'chalk';
+import { Chalk } from 'chalk';
 import createDebug from 'debug';
 import Metalsmith from 'metalsmith';
 
@@ -18,7 +18,10 @@ import { validateContent, validateFiles } from './validator';
 
 const debug = createDebug(require('../package.json').name);
 
-function hiliteExtract(message: VNuMessageObject): string {
+function hiliteExtract(
+    message: VNuMessageObject,
+    chalkCtx: Chalk | null,
+): string {
     if (!hasProp(message, 'extract')) {
         return '';
     }
@@ -30,12 +33,12 @@ function hiliteExtract(message: VNuMessageObject): string {
             hiliteLength = extract.length,
         } = message;
         const hiliteEnd = hiliteStart + hiliteLength;
+        const hiliteExtract = extract.substring(hiliteStart, hiliteEnd);
         return (
             extract.substring(0, hiliteStart) +
-            replaceLine(
-                extract.substring(hiliteStart, hiliteEnd),
-                chalk.yellowBright.inverse,
-            ) +
+            (chalkCtx
+                ? replaceLine(hiliteExtract, chalkCtx.yellowBright.inverse)
+                : hiliteExtract) +
             extract.substring(hiliteEnd)
         );
     } else {
@@ -43,19 +46,26 @@ function hiliteExtract(message: VNuMessageObject): string {
     }
 }
 
-function message2str(message: VNuMessageObject): string {
+function message2str(
+    message: VNuMessageObject,
+    chalkCtx: Chalk | null,
+): string {
     let typeColor = (text: string): string => text;
-    switch (message.type) {
-        case 'info':
-            typeColor =
-                message.subType === 'warning' ? chalk.yellow : chalk.cyan;
-            break;
-        case 'error':
-            typeColor = chalk.red;
-            break;
-        case 'non-document-error':
-            typeColor = chalk.red.bgBlack.bold;
-            break;
+    if (chalkCtx) {
+        switch (message.type) {
+            case 'info':
+                typeColor =
+                    message.subType === 'warning'
+                        ? chalkCtx.yellow
+                        : chalkCtx.cyan;
+                break;
+            case 'error':
+                typeColor = chalkCtx.red;
+                break;
+            case 'non-document-error':
+                typeColor = chalkCtx.red.bgBlack.bold;
+                break;
+        }
     }
 
     return [
@@ -85,7 +95,7 @@ function message2str(message: VNuMessageObject): string {
               ]
             : []),
         ...(hasProp(message, 'extract')
-            ? ['', hiliteExtract(message).replace(/^(?!$)/gm, '  > ')]
+            ? ['', hiliteExtract(message, chalkCtx).replace(/^(?!$)/gm, '  > ')]
             : []),
     ]
         .map(line => line.replace(/^(?!$)/gm, '  '))
@@ -94,10 +104,13 @@ function message2str(message: VNuMessageObject): string {
 
 function vnuData2text(
     data: VNuJSONSchema,
-    getPath: (message: VNuMessageObject) => string,
+    options: {
+        getPath: (message: VNuMessageObject) => string;
+        chalkCtx: Chalk | null;
+    },
 ): string {
     const messagesMap = data.messages.reduce((map, message) => {
-        const path = getPath(message);
+        const path = options.getPath(message);
         map.set(path, [...(map.get(path) || []), message]);
         return map;
     }, new Map<string, VNuMessageObject[]>());
@@ -105,7 +118,12 @@ function vnuData2text(
     return [...messagesMap.entries()]
         .sort(([a], [b]) => compareUnicode(a, b))
         .map(([path, messages]) =>
-            [`${path}:`, ...messages.map(message2str)].join('\n\n'),
+            [
+                `${path}:`,
+                ...messages.map(message =>
+                    message2str(message, options.chalkCtx),
+                ),
+            ].join('\n\n'),
         )
         .join('\n\n');
 }
@@ -154,12 +172,12 @@ export = (
                       targetFilenameList[0],
                   ];
 
-        const result = vnuData2text(
-            data,
-            message => filenameMap.get(message) || message.url || defaultPath,
-        );
-
-        console.error(result);
+        const result = vnuData2text(data, {
+            getPath: message =>
+                filenameMap.get(message) || message.url || defaultPath,
+            chalkCtx: options.chalk || null,
+        });
+        options.logger(result);
 
         if (
             data.messages.some(

@@ -1,8 +1,12 @@
+import chalk, { Chalk } from 'chalk';
 import deepFreeze from 'deep-freeze-strict';
 import Metalsmith from 'metalsmith';
+import supportsColor from 'supports-color';
 
 export interface OptionsInterface {
     readonly pattern: string | ReadonlyArray<string>;
+    readonly logger: (str: string) => void;
+    readonly chalk: Chalk | false | null;
 }
 
 export interface OptionsGenerator {
@@ -15,6 +19,10 @@ export interface OptionsGenerator {
 
 const defaultOptions: OptionsInterface = deepFreeze({
     pattern: ['**/*.{html,htm}'],
+    logger: console.error,
+    chalk: new chalk.constructor({
+        level: supportsColor.stderr ? supportsColor.stderr.level : 0,
+    }),
 });
 
 export async function normalizeOptions(
