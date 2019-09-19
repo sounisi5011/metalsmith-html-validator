@@ -21,8 +21,13 @@
 * [#8] - `@types/supports-color@5.3.0`
 * [#8] - `has-ansi@4.0.0`
 
+### Tests
+
+* [#9] - Improve test speed
+
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...HEAD
 [#8]: https://github.com/sounisi5011/metalsmith-html-validator/pull/8
+[#9]: https://github.com/sounisi5011/metalsmith-html-validator/pull/9
 
 ## [1.0.0] (2019-09-16 UTC)
 
