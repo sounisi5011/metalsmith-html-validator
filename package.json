@@ -102,6 +102,7 @@
   "dependencies": {
     "@types/metalsmith": "2.3.0",
     "@types/rimraf": "2.0.2",
+    "@types/supports-color": "5.3.0",
     "@types/tmp": "0.1.0",
     "chalk": "2.4.2",
     "cross-spawn": "7.0.0",
@@ -111,6 +112,7 @@
     "rimraf": "3.0.0",
     "shell-escape": "0.2.0",
     "signal-exit": "3.0.2",
+    "supports-color": "7.0.0",
     "tmp": "0.1.0",
     "vnu-jar": "19.9.4"
   },
