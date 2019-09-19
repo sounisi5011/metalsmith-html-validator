@@ -12,6 +12,10 @@
 
 #### devDependencies
 
+* `@typescript-eslint/eslint-plugin`
+    * [#5] - `2.2.0` -> `2.3.0`
+* `@typescript-eslint/parser`
+    * [#5] - `2.2.0` -> `2.3.0`
 * `eslint-plugin-prettier`
     * [#6] - `3.1.0` -> `3.1.1`
 
@@ -33,6 +37,7 @@
 * [#9] - Improve test speed
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.0.0...HEAD
+[#5]: https://github.com/sounisi5011/metalsmith-html-validator/pull/5
 [#6]: https://github.com/sounisi5011/metalsmith-html-validator/pull/6
 [#8]: https://github.com/sounisi5011/metalsmith-html-validator/pull/8
 [#9]: https://github.com/sounisi5011/metalsmith-html-validator/pull/9
