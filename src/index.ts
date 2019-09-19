@@ -6,7 +6,7 @@ import {
     OptionsGenerator,
     OptionsInterface,
 } from './options';
-import { VNuMessageObject } from './schemas/vnu-jar';
+import { VNuJSONSchema, VNuMessageObject } from './schemas/vnu-jar';
 import { compareUnicode, hasProp } from './utils';
 import {
     createPlugin,
@@ -50,6 +50,24 @@ function message2str(message: VNuMessageObject): string {
         .join('\n');
 }
 
+function vnuData2text(
+    data: VNuJSONSchema,
+    getPath: (message: VNuMessageObject) => string,
+): string {
+    const messagesMap = data.messages.reduce((map, message) => {
+        const path = getPath(message);
+        map.set(path, [...(map.get(path) || []), message]);
+        return map;
+    }, new Map<string, VNuMessageObject[]>());
+
+    return [...messagesMap.entries()]
+        .sort(([a], [b]) => compareUnicode(a, b))
+        .map(([path, messages]) =>
+            [`${path}:`, ...messages.map(message2str)].join('\n\n'),
+        )
+        .join('\n\n');
+}
+
 export = (
     opts: Partial<OptionsInterface> | OptionsGenerator = {},
 ): Metalsmith.Plugin => {
@@ -73,17 +91,33 @@ export = (
             targetFilenameList,
         );
 
-        const { data, filenameMap } = await (targetFilenameList.length > 1
-            ? validateFiles(
-                  targetFilenameList.reduce<Metalsmith.Files>(
-                      (obj, filename) => ({
-                          ...obj,
-                          [filename]: files[filename],
-                      }),
-                      {},
-                  ),
-              )
-            : validateContent(files[targetFilenameList[0]].contents));
+        const [{ data, filenameMap }, defaultPath] =
+            targetFilenameList.length > 1
+                ? [
+                      await validateFiles(
+                          targetFilenameList.reduce<Metalsmith.Files>(
+                              (obj, filename) => ({
+                                  ...obj,
+                                  [filename]: files[filename],
+                              }),
+                              {},
+                          ),
+                      ),
+                      '',
+                  ]
+                : [
+                      await validateContent(
+                          files[targetFilenameList[0]].contents,
+                      ),
+                      targetFilenameList[0],
+                  ];
+
+        const result = vnuData2text(
+            data,
+            message => filenameMap.get(message) || message.url || defaultPath,
+        );
+
+        console.error(result);
 
         if (
             data.messages.some(
@@ -93,28 +127,7 @@ export = (
             )
         ) {
             debug('detect invalid HTML');
-
-            const defaultPath =
-                targetFilenameList.length === 1 ? targetFilenameList[0] : '';
-            const messagesMap = data.messages.reduce((map, message) => {
-                const path =
-                    filenameMap.get(message) || message.url || defaultPath;
-                map.set(path, [...(map.get(path) || []), message]);
-                return map;
-            }, new Map<string, VNuMessageObject[]>());
-
-            const error = new Error('Some files are invalid HTML');
-            const stack = error.stack;
-            error.message +=
-                '\n\n' +
-                [...messagesMap.entries()]
-                    .sort(([a], [b]) => compareUnicode(a, b))
-                    .map(([path, messages]) =>
-                        [`${path}:`, ...messages.map(message2str)].join('\n\n'),
-                    )
-                    .join('\n\n');
-            error.stack = stack;
-            throw error;
+            throw new Error('Some files are invalid HTML');
         }
     });
 };
