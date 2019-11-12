@@ -9,8 +9,13 @@
 * `package-version-git-tag`
     * [#27] - `1.1.2` -> `2.0.2`
 
+### Others
+
+* [#28] - Migrate from Travis CI to Azure Pipelines
+
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
+[#28]: https://github.com/sounisi5011/metalsmith-html-validator/pull/28
 
 ## [1.1.0] (2019-09-19 UTC)
 

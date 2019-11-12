@@ -1,0 +1,35 @@
+# Node.js
+# Build a general Node.js project with npm.
+# Add steps that analyze code, save build artifacts, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/javascript
+
+# no PR builds
+pr: none
+
+stages:
+  - stage: Test
+
+    jobs:
+      - template: azure-pipelines-templates/jobs/lint.yml
+
+      - template: azure-pipelines-templates/jobs/unit-test.yml
+        parameters:
+          name: Linux
+          vmImage: ubuntu-latest
+
+    # Packages not used in Linter and / or test code cannot be tested with CI, so exclude branches of update such packages
+    condition: |
+      and(
+        succeeded(),
+        not(or(
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/can-npm-publish-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/del-cli-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/git-branch-is-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/husky-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/is-git-status-clean-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/lint-staged-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/package-version-git-tag-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/prettier-package-json-'),
+          startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/sort-package-json-')
+        ))
+      )
