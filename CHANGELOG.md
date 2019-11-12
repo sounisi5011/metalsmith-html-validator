@@ -27,6 +27,8 @@
     * [#27] - `1.1.2` -> `2.0.2`
 * `prettier`
     * [#23] - `1.18.2` -> `1.19.1`
+* `ts-node`
+    * [#26] - `8.4.1` -> `8.5.0`
 
 ### Removed Dependencies
 
@@ -50,6 +52,7 @@
 [#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
+[#26]: https://github.com/sounisi5011/metalsmith-html-validator/pull/26
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
 [#28]: https://github.com/sounisi5011/metalsmith-html-validator/pull/28
 
