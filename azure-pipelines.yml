@@ -26,7 +26,6 @@ stages:
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/del-cli-'),
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/git-branch-is-'),
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/husky-'),
-          startsWith(variables['Build.SourceBranch'], 'refs/heads/migrate-travis-ci-to-azure-'),
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/is-git-status-clean-'),
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/lint-staged-'),
           startsWith(variables['Build.SourceBranch'], 'refs/heads/renovate/package-version-git-tag-'),
