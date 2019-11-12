@@ -13,6 +13,8 @@
 
 #### devDependencies
 
+* `@types/cross-spawn`
+    * [#17] - `6.0.0` -> `6.0.1`
 * `@typescript-eslint/eslint-plugin`
     * [#12] - `2.3.0` -> `2.7.0`
 * `@typescript-eslint/parser`
@@ -58,6 +60,7 @@
 [#14]: https://github.com/sounisi5011/metalsmith-html-validator/pull/14
 [#15]: https://github.com/sounisi5011/metalsmith-html-validator/pull/15
 [#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
+[#17]: https://github.com/sounisi5011/metalsmith-html-validator/pull/17
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
 [#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
 [#20]: https://github.com/sounisi5011/metalsmith-html-validator/pull/20
