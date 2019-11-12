@@ -104,7 +104,7 @@
     "@types/rimraf": "2.0.2",
     "@types/tmp": "0.1.0",
     "chalk": "3.0.0",
-    "cross-spawn": "7.0.0",
+    "cross-spawn": "7.0.1",
     "debug": "4.1.1",
     "deep-freeze-strict": "1.1.1",
     "multimatch": "4.0.0",
