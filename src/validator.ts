@@ -101,27 +101,11 @@ export async function validateFiles(
     const data: VNuJSONSchema = JSON.parse(result.stderr.toString());
 
     const filenameMap = new WeakMap<VNuMessageObject, string>();
-    const _xDbg = new Set<string>();
     data.messages.forEach(message => {
         const { url } = message;
         if (url) {
             if (/^file:/.test(url)) {
                 const filepath = fileURLToPath(url);
-
-                if (!_xDbg.has(url)) {
-                    console.log(
-                        '\n',
-                        {
-                            tmpDir,
-                            url,
-                            filepath,
-                            filename: path.relative(tmpDir, filepath),
-                        },
-                        '\n',
-                    );
-                    _xDbg.add(url);
-                }
-
                 filenameMap.set(message, path.relative(tmpDir, filepath));
             }
         }
