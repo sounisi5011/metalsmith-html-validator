@@ -11,6 +11,8 @@
 
 #### devDependencies
 
+* `can-npm-publish`
+    * [#16] - `1.3.1` -> `1.3.2`
 * `package-version-git-tag`
     * [#27] - `1.1.2` -> `2.0.2`
 * `prettier`
@@ -31,6 +33,7 @@
 * [#28] - Migrate from Travis CI to Azure Pipelines
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+[#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
