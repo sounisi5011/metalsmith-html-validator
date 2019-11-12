@@ -11,6 +11,10 @@
 
 #### devDependencies
 
+* `@typescript-eslint/eslint-plugin`
+    * [#12] - `2.3.0` -> `2.7.0`
+* `@typescript-eslint/parser`
+    * [#12] - `2.3.0` -> `2.7.0`
 * `can-npm-publish`
     * [#16] - `1.3.1` -> `1.3.2`
 * `package-version-git-tag`
@@ -33,6 +37,7 @@
 * [#28] - Migrate from Travis CI to Azure Pipelines
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+[#12]: https://github.com/sounisi5011/metalsmith-html-validator/pull/12
 [#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
