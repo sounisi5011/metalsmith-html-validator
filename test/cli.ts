@@ -1,6 +1,7 @@
 import test from 'ava';
 import path from 'path';
 
+import { mkdirAsync, removeForceAsync } from './helpers';
 import exec from './helpers/exec';
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -25,6 +26,8 @@ test('should work with Metalsmith CLI', async t => {
      * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
      * Regenerating the symbolic link with the "npm install" command can solve this problem.
      */
+    await t.notThrowsAsync(removeForceAsync(path.join(cwd, 'node_modules')));
+    await t.notThrowsAsync(mkdirAsync(path.join(cwd, 'node_modules')));
     await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
 
     await t.notThrowsAsync(
@@ -41,6 +44,8 @@ test('should not work with Metalsmith CLI', async t => {
      * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
      * Regenerating the symbolic link with the "npm install" command can solve this problem.
      */
+    await t.notThrowsAsync(removeForceAsync(path.join(cwd, 'node_modules')));
+    await t.notThrowsAsync(mkdirAsync(path.join(cwd, 'node_modules')));
     await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
 
     const error = await t.throwsAsync(
