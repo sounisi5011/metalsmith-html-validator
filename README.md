@@ -6,7 +6,7 @@
 ![Type Definitions: TypeScript](https://img.shields.io/npm/types/metalsmith-html-validator.svg)
 [![bundle size](https://badgen.net/bundlephobia/min/metalsmith-html-validator@1.1.0)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.0)
 [![Dependencies Status](https://david-dm.org/sounisi5011/metalsmith-html-validator/status.svg)](https://david-dm.org/sounisi5011/metalsmith-html-validator)
-[![Build Status](https://travis-ci.com/sounisi5011/metalsmith-html-validator.svg?branch=master)](https://travis-ci.com/sounisi5011/metalsmith-html-validator)
+[![Build Status](https://dev.azure.com/sounisi5011/npm%20projects/_apis/build/status/sounisi5011.metalsmith-html-validator?branchName=master)](https://dev.azure.com/sounisi5011/npm%20projects/_build/latest?definitionId=3&branchName=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/3fdd1f208cb3fb05faac/maintainability)](https://codeclimate.com/github/sounisi5011/metalsmith-html-validator/maintainability)
 
 [npm]: https://www.npmjs.com/package/metalsmith-html-validator
