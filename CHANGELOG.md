@@ -8,6 +8,8 @@
 
 * `chalk`
     * [#24] - `2.4.2` -> `3.0.0`
+* `cross-spawn`
+    * [#19] - `7.0.0` -> `7.0.1`
 
 #### devDependencies
 
@@ -45,6 +47,7 @@
 [#15]: https://github.com/sounisi5011/metalsmith-html-validator/pull/15
 [#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
+[#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
