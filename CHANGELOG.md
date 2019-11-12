@@ -2,7 +2,15 @@
 
 ## [Unreleased]
 
+### Updated Dependencies
+
+#### devDependencies
+
+* `package-version-git-tag`
+    * [#27] - `1.1.2` -> `2.0.2`
+
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+[#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
 
 ## [1.1.0] (2019-09-19 UTC)
 
