@@ -18,7 +18,7 @@ test('should colored validator details', async t => {
                 logger(str) {
                     details = str;
                 },
-                chalk: new chalk.constructor({ level: 1 }),
+                chalk: new chalk.Instance({ level: 1 }),
             }),
         );
 

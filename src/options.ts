@@ -20,7 +20,7 @@ export interface OptionsGenerator {
 const defaultOptions: OptionsInterface = deepFreeze({
     pattern: ['**/*.{html,htm}'],
     logger: console.error,
-    chalk: new chalk.constructor({
+    chalk: new chalk.Instance({
         level: supportsColor.stderr ? supportsColor.stderr.level : 0,
     }),
 });
