@@ -4,6 +4,11 @@
 
 ### Updated Dependencies
 
+#### dependencies
+
+* `chalk`
+    * [#24] - `2.4.2` -> `3.0.0`
+
 #### devDependencies
 
 * `package-version-git-tag`
@@ -11,12 +16,23 @@
 * `prettier`
     * [#23] - `1.18.2` -> `1.19.1`
 
+### Removed Dependencies
+
+#### dependencies
+
+* [#24] - `supports-color`
+
+#### devDependencies
+
+* [#24] - `@types/supports-color`
+
 ### Others
 
 * [#28] - Migrate from Travis CI to Azure Pipelines
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
+[#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
 [#28]: https://github.com/sounisi5011/metalsmith-html-validator/pull/28
 
