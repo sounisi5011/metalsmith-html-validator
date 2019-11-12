@@ -6,6 +6,8 @@
 
 #### dependencies
 
+* `@types/rimraf`
+    * [#21] - `2.0.2` -> `2.0.3`
 * `chalk`
     * [#24] - `2.4.2` -> `3.0.0`
 * `cross-spawn`
@@ -64,6 +66,7 @@
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
 [#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
 [#20]: https://github.com/sounisi5011/metalsmith-html-validator/pull/20
+[#21]: https://github.com/sounisi5011/metalsmith-html-validator/pull/21
 [#22]: https://github.com/sounisi5011/metalsmith-html-validator/pull/22
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
