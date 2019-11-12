@@ -65,7 +65,7 @@
     "test:ava": "ava",
     "test:check-type-defs-pkgs": "node script/check-type-defs-pkgs.js ./dist/ build",
     "test:peer-deps": "check-peer-deps",
-    "test:readme": "run-s 'build:readme --test'"
+    "test:readme": "run-s 'build:readme -- --test'"
   },
   "husky": {
     "hooks": {

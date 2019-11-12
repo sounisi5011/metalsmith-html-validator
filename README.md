@@ -110,7 +110,7 @@ metalsmith
 The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L20-L26) like this:
 
 ```js
-const chalk = require('chalk'); // chalk@2.4.2
+const chalk = require('chalk'); // chalk@3.0.0
 const supportsColor = require('supports-color'); // supports-color@7.0.0
 
 {
@@ -163,12 +163,12 @@ Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validat
 Specifies the [chalk][npm-chalk-used] instance that colors the validator result.  
 When `false` or `null` is specified, coloring is disabled.
 
-[npm-chalk-used]: https://www.npmjs.com/package/chalk/v/2.4.2
+[npm-chalk-used]: https://www.npmjs.com/package/chalk/v/3.0.0
 
 Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L23-L25)):
 
 ```js
-const chalk = require('chalk'); // chalk@2.4.2
+const chalk = require('chalk'); // chalk@3.0.0
 const supportsColor = require('supports-color'); // supports-color@7.0.0
 
 new chalk.constructor({
