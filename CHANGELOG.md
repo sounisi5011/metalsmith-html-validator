@@ -25,6 +25,8 @@
     * [#18] - `6.3.0` -> `6.5.0`
 * `husky`
     * [#14] - `3.0.5` -> `3.0.9`
+* `lint-staged`
+    * [#11] - `9.2.5` -> `9.4.2`
 * `package-version-git-tag`
     * [#27] - `1.1.2` -> `2.0.2`
 * `prettier`
@@ -51,6 +53,7 @@
 * [#28] - Migrate from Travis CI to Azure Pipelines
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+[#11]: https://github.com/sounisi5011/metalsmith-html-validator/pull/11
 [#12]: https://github.com/sounisi5011/metalsmith-html-validator/pull/12
 [#14]: https://github.com/sounisi5011/metalsmith-html-validator/pull/14
 [#15]: https://github.com/sounisi5011/metalsmith-html-validator/pull/15
