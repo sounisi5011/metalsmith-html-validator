@@ -19,17 +19,33 @@ test.before(async () => {
 });
 
 test('should work with Metalsmith CLI', async t => {
+    const cwd = path.join(fixtures, 'valid');
+
+    /**
+     * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
+     * Regenerating the symbolic link with the "npm install" command can solve this problem.
+     */
+    await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
+
     await t.notThrowsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'valid'),
+            cwd,
         }),
     );
 });
 
 test('should not work with Metalsmith CLI', async t => {
+    const cwd = path.join(fixtures, 'invalid');
+
+    /**
+     * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
+     * Regenerating the symbolic link with the "npm install" command can solve this problem.
+     */
+    await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
+
     const error = await t.throwsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'invalid'),
+            cwd,
         }),
     );
 
