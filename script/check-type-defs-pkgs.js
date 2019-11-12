@@ -1,4 +1,8 @@
-/* @see https://github.com/sounisi5011/metalsmith-pug-extra/blob/v1.1.2/script/check-type-defs-pkgs.js */
+/**
+ * @see https://github.com/sounisi5011/metalsmith-pug-extra/blob/v1.1.2/script/check-type-defs-pkgs.js
+ *
+ * Updated by 340e521b4d38e54c93f226d438e38b05c2216928 - TypeError: AST type "TSImportEqualsDeclaration" not supported
+ */
 
 const spawn = require('cross-spawn');
 const fs = require('fs');
@@ -73,12 +77,15 @@ async function main(distDir, buildTask) {
   }
 
   const importSet = new Set(
-    (await Promise.all(
-      tsFilepathList
-        .map(filepath => readFileAsync(filepath, 'utf8'))
-        .map(async code => parser.parse(await code))
-        .map(async ast => getImportNames(await ast)),
-    )).reduce((a, b) => a.concat(b)),
+    (
+      await Promise.all(
+        tsFilepathList.map(async filepath => {
+          const code = await readFileAsync(filepath, 'utf8');
+          const ast = parser.parse(code);
+          return getImportNames(filepath, ast);
+        }),
+      )
+    ).reduce((a, b) => a.concat(b)),
   );
 
   const typePkgNames = {
@@ -115,9 +122,11 @@ async function main(distDir, buildTask) {
   }
 }
 
-function getImportNames(ast) {
+function getImportNames(filepath, ast) {
+  const filename = path.relative(process.cwd(), filepath);
+
   if (Array.isArray(ast)) {
-    return [].concat(...ast.map(getImportNames));
+    return [].concat(...ast.map(astItem => getImportNames(filepath, astItem)));
   } else if (typeof ast === 'object' && ast) {
     if (ast.type && AST_IMPORT_TYPES.includes(ast.type)) {
       if (ast.type === 'ImportDeclaration') {
@@ -125,7 +134,7 @@ function getImportNames(ast) {
           return [ast.source.value];
         }
         throw new TypeError(
-          `AST type "${ast.type}" / Source AST type "${ast.source.type}" not supported`,
+          `AST type "${ast.type}" / Source AST type "${ast.source.type}" not supported in '${filename}'`,
         );
       }
 
@@ -135,17 +144,38 @@ function getImportNames(ast) {
             return [ast.parameter.literal.value];
           }
           throw new TypeError(
-            `AST type "${ast.type}" / Parameter AST type "${ast.parameter.type}" / Literal AST type "${ast.parameter.literal.type}" not supported`,
+            `AST type "${ast.type}" / Parameter AST type "${ast.parameter.type}" / Literal AST type "${ast.parameter.literal.type}" not supported in '${filename}'`,
           );
         }
         throw new TypeError(
-          `AST type "${ast.type}" / Parameter AST type "${ast.parameter.type}" not supported`,
+          `AST type "${ast.type}" / Parameter AST type "${ast.parameter.type}" not supported in '${filename}'`,
         );
       }
 
-      throw new TypeError(`AST type "${ast.type}" not supported`);
+      /*
+       * import module = require('module')
+       */
+      if (ast.type === 'TSImportEqualsDeclaration') {
+        if (ast.moduleReference.type === 'TSExternalModuleReference') {
+          if (ast.moduleReference.expression.type === 'Literal') {
+            return [ast.moduleReference.expression.value];
+          }
+          throw new TypeError(
+            `AST type "${ast.type}" / ModuleReference AST type "${ast.moduleReference.type}" / Expression AST type "${ast.moduleReference.expression.type}" not supported in '${filename}'`,
+          );
+        }
+        throw new TypeError(
+          `AST type "${ast.type}" / ModuleReference AST type "${ast.moduleReference.type}" not supported in '${filename}'`,
+        );
+      }
+
+      throw new TypeError(
+        `AST type "${ast.type}" not supported in '${filename}'`,
+      );
     } else {
-      return [].concat(...Object.values(ast).map(getImportNames));
+      return [].concat(
+        ...Object.values(ast).map(astItem => getImportNames(filepath, astItem)),
+      );
     }
   }
 

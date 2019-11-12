@@ -1,4 +1,3 @@
-import { Chalk } from 'chalk';
 import createDebug from 'debug';
 import Metalsmith from 'metalsmith';
 
@@ -16,11 +15,13 @@ import {
 } from './utils/metalsmith';
 import { validateContent, validateFiles } from './validator';
 
+import chalk = require('chalk');
+
 const debug = createDebug(require('../package.json').name);
 
 function hiliteExtract(
     message: VNuMessageObject,
-    chalkCtx: Chalk | null,
+    chalkCtx: chalk.Chalk | null,
 ): string {
     if (!hasProp(message, 'extract')) {
         return '';
@@ -48,7 +49,7 @@ function hiliteExtract(
 
 function message2str(
     message: VNuMessageObject,
-    chalkCtx: Chalk | null,
+    chalkCtx: chalk.Chalk | null,
 ): string {
     let typeColor = (text: string): string => text;
     if (chalkCtx) {
@@ -106,7 +107,7 @@ function vnuData2text(
     data: VNuJSONSchema,
     options: {
         getPath: (message: VNuMessageObject) => string;
-        chalkCtx: Chalk | null;
+        chalkCtx: chalk.Chalk | null;
     },
 ): string {
     const messagesMap = data.messages.reduce((map, message) => {

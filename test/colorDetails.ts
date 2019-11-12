@@ -1,11 +1,12 @@
 import test from 'ava';
-import chalk from 'chalk';
 import hasAnsi from 'has-ansi';
 import Metalsmith from 'metalsmith';
 import path from 'path';
 
 import { processAsync } from './helpers/metalsmith';
 import htmlValidator = require('../src/index');
+
+import chalk = require('chalk');
 
 const fixtures = path.join(__dirname, 'fixtures');
 
@@ -18,7 +19,7 @@ test('should colored validator details', async t => {
                 logger(str) {
                     details = str;
                 },
-                chalk: new chalk.constructor({ level: 1 }),
+                chalk: new chalk.Instance({ level: 1 }),
             }),
         );
 

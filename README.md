@@ -110,15 +110,12 @@ metalsmith
 The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L20-L26) like this:
 
 ```js
-const chalk = require('chalk'); // chalk@2.4.2
-const supportsColor = require('supports-color'); // supports-color@7.0.0
+const chalk = require('chalk'); // chalk@3.0.0
 
 {
   pattern: ['**/*.{html,htm}'],
   logger: console.error,
-  chalk: new chalk.constructor({
-      level: supportsColor.stderr ? supportsColor.stderr.level : 0,
-  }),
+  chalk: chalk.stderr,
 }
 ```
 
@@ -130,7 +127,7 @@ Pattern are verified using [multimatch v4.0.0][npm-multimatch-used].
 
 [npm-multimatch-used]: https://www.npmjs.com/package/multimatch/v/4.0.0
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L21)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L22)):
 
 ```js
 ['**/*.{html,htm}']
@@ -146,7 +143,7 @@ string | string[]
 
 Specify a logger function to process the validator result.
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L22)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L23)):
 
 ```js
 console.error
@@ -163,25 +160,22 @@ Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validat
 Specifies the [chalk][npm-chalk-used] instance that colors the validator result.  
 When `false` or `null` is specified, coloring is disabled.
 
-[npm-chalk-used]: https://www.npmjs.com/package/chalk/v/2.4.2
+[npm-chalk-used]: https://www.npmjs.com/package/chalk/v/3.0.0
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L23-L25)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L25)):
 
 ```js
-const chalk = require('chalk'); // chalk@2.4.2
-const supportsColor = require('supports-color'); // supports-color@7.0.0
+const chalk = require('chalk'); // chalk@3.0.0
 
-new chalk.constructor({
-  level: supportsColor.stderr ? supportsColor.stderr.level : 0,
-})
+chalk.stderr
 ```
 
 Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L9)):
 
 ```ts
-// import { Chalk } from 'chalk';
+// import chalk = require('chalk'); // chalk@3.0.0
 
-Chalk | false | null
+chalk.Chalk | false | null
 ```
 
 ## Debug mode
