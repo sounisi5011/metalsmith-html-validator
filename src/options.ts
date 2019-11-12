@@ -1,7 +1,6 @@
 import chalk, { Chalk } from 'chalk';
 import deepFreeze from 'deep-freeze-strict';
 import Metalsmith from 'metalsmith';
-import supportsColor from 'supports-color';
 
 export interface OptionsInterface {
     readonly pattern: string | ReadonlyArray<string>;
@@ -22,9 +21,7 @@ const defaultOptions: OptionsInterface = Object.freeze({
         pattern: ['**/*.{html,htm}'],
         logger: console.error,
     }),
-    chalk: new chalk.Instance({
-        level: supportsColor.stderr ? supportsColor.stderr.level : 0,
-    }),
+    chalk: chalk.stderr,
 });
 
 export async function normalizeOptions(
