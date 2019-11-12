@@ -7,7 +7,7 @@ jobs:
     steps:
       - template: ../steps/init-node.yml
 
-      - script: npx run-s test:readme test:peer-deps lint test:ava test:check-type-defs-pkgs
+      - script: npx run-s test:readme test:peer-deps lint test:check-type-defs-pkgs
         displayName: Run linter
         timeoutInMinutes: 5
 
