@@ -17,9 +17,11 @@ export interface OptionsGenerator {
     ): Partial<OptionsInterface> | Promise<Partial<OptionsInterface>>;
 }
 
-const defaultOptions: OptionsInterface = deepFreeze({
-    pattern: ['**/*.{html,htm}'],
-    logger: console.error,
+const defaultOptions: OptionsInterface = Object.freeze({
+    ...deepFreeze({
+        pattern: ['**/*.{html,htm}'],
+        logger: console.error,
+    }),
     chalk: new chalk.Instance({
         level: supportsColor.stderr ? supportsColor.stderr.level : 0,
     }),
