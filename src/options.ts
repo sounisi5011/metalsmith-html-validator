@@ -1,11 +1,12 @@
-import chalk, { Chalk } from 'chalk';
 import deepFreeze from 'deep-freeze-strict';
 import Metalsmith from 'metalsmith';
+
+import chalk = require('chalk');
 
 export interface OptionsInterface {
     readonly pattern: string | ReadonlyArray<string>;
     readonly logger: (str: string) => void;
-    readonly chalk: Chalk | false | null;
+    readonly chalk: chalk.Chalk | false | null;
 }
 
 export interface OptionsGenerator {
