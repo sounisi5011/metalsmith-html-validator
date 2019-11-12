@@ -17,6 +17,8 @@
     * [#12] - `2.3.0` -> `2.7.0`
 * `can-npm-publish`
     * [#16] - `1.3.1` -> `1.3.2`
+* `eslint`
+    * [#15] - `6.4.0` -> `6.6.0`
 * `eslint-config-prettier`
     * [#18] - `6.3.0` -> `6.5.0`
 * `package-version-git-tag`
@@ -40,6 +42,7 @@
 
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
 [#12]: https://github.com/sounisi5011/metalsmith-html-validator/pull/12
+[#15]: https://github.com/sounisi5011/metalsmith-html-validator/pull/15
 [#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
