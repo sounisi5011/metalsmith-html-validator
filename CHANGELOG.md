@@ -27,6 +27,8 @@
     * [#27] - `1.1.2` -> `2.0.2`
 * `prettier`
     * [#23] - `1.18.2` -> `1.19.1`
+* `sort-package-json`
+    * [#22] - `1.22.1` -> `1.23.1`
 * `ts-node`
     * [#26] - `8.4.1` -> `8.5.0`
 * `typescript`
@@ -53,6 +55,7 @@
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
 [#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
 [#20]: https://github.com/sounisi5011/metalsmith-html-validator/pull/20
+[#22]: https://github.com/sounisi5011/metalsmith-html-validator/pull/22
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
 [#26]: https://github.com/sounisi5011/metalsmith-html-validator/pull/26
