@@ -1,8 +1,5 @@
 import fs from 'fs';
 import path from 'path';
-import util from 'util';
-
-export { removeForceAsync } from '../../src/utils';
 
 export function ignoreTypeError(callback: () => void): void {
     try {
@@ -13,8 +10,6 @@ export function ignoreTypeError(callback: () => void): void {
         }
     }
 }
-
-export const mkdirAsync = util.promisify(fs.mkdir);
 
 export async function readdirAsync(dirpath: string): Promise<string[]> {
     return new Promise((resolve, reject) => {
