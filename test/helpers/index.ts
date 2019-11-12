@@ -36,11 +36,13 @@ export async function statAsync(filepath: string): Promise<fs.Stats> {
 }
 
 export async function childdirList(parentdirpath: string): Promise<string[]> {
-    return (await Promise.all(
-        (await readdirAsync(parentdirpath)).map(async filename => {
-            const filepath = path.join(parentdirpath, filename);
-            const stat = await statAsync(filepath);
-            return stat.isDirectory() ? filename : null;
-        }),
-    )).filter((filename): filename is string => filename !== null);
+    return (
+        await Promise.all(
+            (await readdirAsync(parentdirpath)).map(async filename => {
+                const filepath = path.join(parentdirpath, filename);
+                const stat = await statAsync(filepath);
+                return stat.isDirectory() ? filename : null;
+            }),
+        )
+    ).filter((filename): filename is string => filename !== null);
 }
