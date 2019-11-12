@@ -29,6 +29,8 @@
     * [#23] - `1.18.2` -> `1.19.1`
 * `ts-node`
     * [#26] - `8.4.1` -> `8.5.0`
+* `typescript`
+    * [#20] - `3.6.3` -> `3.7.2`
 
 ### Removed Dependencies
 
@@ -50,6 +52,7 @@
 [#16]: https://github.com/sounisi5011/metalsmith-html-validator/pull/16
 [#18]: https://github.com/sounisi5011/metalsmith-html-validator/pull/18
 [#19]: https://github.com/sounisi5011/metalsmith-html-validator/pull/19
+[#20]: https://github.com/sounisi5011/metalsmith-html-validator/pull/20
 [#23]: https://github.com/sounisi5011/metalsmith-html-validator/pull/23
 [#24]: https://github.com/sounisi5011/metalsmith-html-validator/pull/24
 [#26]: https://github.com/sounisi5011/metalsmith-html-validator/pull/26
