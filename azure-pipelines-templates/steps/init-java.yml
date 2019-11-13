@@ -1,0 +1,3 @@
+steps:
+  - script: java -version
+    displayName: Show Java version

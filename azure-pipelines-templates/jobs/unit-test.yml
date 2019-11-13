@@ -33,6 +33,8 @@ jobs:
         parameters:
           nodeVersion: $(node_version)
 
+      - template: ../steps/init-java.yml
+
       - script: npm run test:ava
         displayName: Run unit test
         timeoutInMinutes: 5
