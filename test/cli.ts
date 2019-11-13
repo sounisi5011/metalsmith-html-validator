@@ -1,6 +1,7 @@
 import test from 'ava';
 import path from 'path';
 
+import { rimrafAsync } from './helpers';
 import exec from './helpers/exec';
 
 const PROJECT_ROOT = path.resolve(__dirname, '..');
@@ -11,6 +12,7 @@ const metalsmithCLI = path.resolve(
     '.bin',
     'metalsmith',
 );
+const isWindows = process.platform === 'win32';
 
 test.before(async () => {
     await exec('npm', ['run', 'build'], {
@@ -19,17 +21,43 @@ test.before(async () => {
 });
 
 test('should work with Metalsmith CLI', async t => {
+    const cwd = path.join(fixtures, 'valid');
+
+    /**
+     * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
+     * Regenerating the symbolic link with the "npm install" command can solve this problem.
+     */
+    if (isWindows) {
+        await t.notThrowsAsync(
+            rimrafAsync('node_modules/*', { glob: { cwd, absolute: true } }),
+        );
+        await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
+    }
+
     await t.notThrowsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'valid'),
+            cwd,
         }),
     );
 });
 
 test('should not work with Metalsmith CLI', async t => {
+    const cwd = path.join(fixtures, 'invalid');
+
+    /**
+     * On Windows, modules cannot be import from symbolic links to the node_modules directory committed to Git.
+     * Regenerating the symbolic link with the "npm install" command can solve this problem.
+     */
+    if (isWindows) {
+        await t.notThrowsAsync(
+            rimrafAsync('node_modules/*', { glob: { cwd, absolute: true } }),
+        );
+        await t.notThrowsAsync(exec('npm', ['install', PROJECT_ROOT], { cwd }));
+    }
+
     const error = await t.throwsAsync(
         exec(metalsmithCLI, [], {
-            cwd: path.join(fixtures, 'invalid'),
+            cwd,
         }),
     );
 

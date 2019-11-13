@@ -1,6 +1,7 @@
 import createDebug from 'debug';
 import path from 'path';
 import onExit from 'signal-exit';
+import url from 'url';
 import vnuJar from 'vnu-jar';
 
 import { VNuJSONSchema, VNuMessageObject } from './schemas/vnu-jar';
@@ -13,7 +14,33 @@ import {
 } from './utils';
 import { FileInterface, writeFilesAsync } from './utils/metalsmith';
 
+import fileUriToPath = require('file-uri-to-path');
+
 const debug = createDebug(require('../package.json').name).extend('validator');
+
+const fileURLToPath =
+    typeof url.fileURLToPath === 'function'
+        ? /**
+           * If available, use the Node.js built-in fileURLToPath function
+           * @see https://nodejs.org/api/url.html#url_url_fileurltopath_url
+           */
+          url.fileURLToPath
+        : (fileurl: string): string =>
+              fileUriToPath(
+                  fileurl
+                      /**
+                       * Unify URL scheme to lower case
+                       * @see https://stackoverflow.com/a/2148663/4907315
+                       * @see https://github.com/TooTallNate/file-uri-to-path/blob/2.0.0/src/index.ts#L15
+                       */
+                      .replace(/^file:/i, 'file:')
+                      /**
+                       * Add optional "//"
+                       * @see https://github.com/TooTallNate/file-uri-to-path/issues/7
+                       * @see http://eed3si9n.com/ja/encoding-file-path-as-URI-reference
+                       */
+                      .replace(/^file:(?!\/\/)\/*/, 'file:///'),
+              );
 
 export async function validateContent(
     content: string | Buffer,
@@ -77,12 +104,7 @@ export async function validateFiles(
     data.messages.forEach(message => {
         const { url } = message;
         if (url) {
-            if (/^file:/.test(url)) {
-                filenameMap.set(
-                    message,
-                    path.relative(tmpDir, url.substring(5)),
-                );
-            }
+            filenameMap.set(message, path.relative(tmpDir, fileURLToPath(url)));
         }
     });
 

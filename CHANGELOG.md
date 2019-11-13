@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+### Features
+
+* [#29] - Support Windows
+
 ### Updated Dependencies
 
 #### dependencies
@@ -42,6 +46,12 @@
 * `typescript`
     * [#20] - `3.6.3` -> `3.7.2`
 
+### Added Dependencies
+
+#### dependencies
+
+* [#29] - `file-uri-to-path@2.0.0`
+
 ### Removed Dependencies
 
 #### dependencies
@@ -73,6 +83,7 @@
 [#26]: https://github.com/sounisi5011/metalsmith-html-validator/pull/26
 [#27]: https://github.com/sounisi5011/metalsmith-html-validator/pull/27
 [#28]: https://github.com/sounisi5011/metalsmith-html-validator/pull/28
+[#29]: https://github.com/sounisi5011/metalsmith-html-validator/pull/29
 
 ## [1.1.0] (2019-09-19 UTC)
 

@@ -1,5 +1,7 @@
 import fs from 'fs';
 import path from 'path';
+import rimraf from 'rimraf';
+import util from 'util';
 
 export function ignoreTypeError(callback: () => void): void {
     try {
@@ -10,6 +12,8 @@ export function ignoreTypeError(callback: () => void): void {
         }
     }
 }
+
+export const rimrafAsync = util.promisify(rimraf);
 
 export async function readdirAsync(dirpath: string): Promise<string[]> {
     return new Promise((resolve, reject) => {

@@ -17,6 +17,11 @@ stages:
           name: Linux
           vmImage: ubuntu-latest
 
+      - template: azure-pipelines-templates/jobs/unit-test.yml
+        parameters:
+          name: Windows
+          vmImage: windows-latest
+
     # Packages not used in Linter and / or test code cannot be tested with CI, so exclude branches of update such packages
     condition: |
       and(
