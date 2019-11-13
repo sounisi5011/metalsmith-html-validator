@@ -17,8 +17,5 @@ steps:
       node -p 'Object.entries(process.env).filter(([key]) => /^java_home/i.test(key)).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {})'
     displayName: Show JAVA_HOME
 
-  - bash: ls -lhpa $(dirname $JAVA_HOME)
-    displayName: Show Java installed dir
-
   - script: java -version
     displayName: Show Java version
