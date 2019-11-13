@@ -1,3 +1,11 @@
+parameters:
+  version: 8
+
 steps:
+  - task: JavaToolInstaller@0
+    inputs:
+      versionSpec: ${{ parameters.version }}
+    displayName: Install Java
+
   - script: java -version
     displayName: Show Java version
