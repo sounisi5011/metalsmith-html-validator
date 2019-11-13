@@ -25,5 +25,5 @@ steps:
     displayName: Show Java version
 
   - bash: |
-      echo "JAVA_HOME: ${JAVA_HOME}"
+      node -p 'Object.entries(process.env).filter(([key]) => /^java_home/i.test(key)).reduce((obj, [key, value]) => ({ ...obj, [key]: value }), {})'
     displayName: Reshow JAVA_HOME
