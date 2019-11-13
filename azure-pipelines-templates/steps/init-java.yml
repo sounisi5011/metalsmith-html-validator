@@ -22,3 +22,7 @@ steps:
 
   - script: java -version
     displayName: Show Java version
+
+  - bash: |
+      echo "JAVA_HOME: ${JAVA_HOME}"
+    displayName: Reshow JAVA_HOME
