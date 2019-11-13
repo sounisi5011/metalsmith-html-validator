@@ -1,16 +1,16 @@
 # metalsmith-html-validator
 
-[![npm package](https://img.shields.io/npm/v/metalsmith-html-validator.svg)][npm]
+[![Go to the latest release page on npm](https://img.shields.io/npm/v/metalsmith-html-validator.svg)][npm]
 [![License: MIT](https://img.shields.io/static/v1?label=license&message=MIT&color=green)][github-license]
-![Supported Node version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
-![Type Definitions: TypeScript](https://img.shields.io/npm/types/metalsmith-html-validator.svg)
-[![bundle size](https://badgen.net/bundlephobia/min/metalsmith-html-validator@1.1.0)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.0)
+![Supported Node.js version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
+![Type Definitions: TypeScript](https://img.shields.io/static/v1?label=types&message=TypeScript&color=blue)
+[![bundle size](https://img.shields.io/bundlephobia/min/metalsmith-html-validator/1.1.1)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.1)
 [![Dependencies Status](https://david-dm.org/sounisi5011/metalsmith-html-validator/status.svg)](https://david-dm.org/sounisi5011/metalsmith-html-validator)
 [![Build Status](https://dev.azure.com/sounisi5011/npm%20projects/_apis/build/status/sounisi5011.metalsmith-html-validator?branchName=master)](https://dev.azure.com/sounisi5011/npm%20projects/_build/latest?definitionId=3&branchName=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/3fdd1f208cb3fb05faac/maintainability)](https://codeclimate.com/github/sounisi5011/metalsmith-html-validator/maintainability)
 
 [npm]: https://www.npmjs.com/package/metalsmith-html-validator
-[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/LICENSE
+[github-license]: https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/LICENSE
 
 [Metalsmith] plugin for HTML validation, using the [Nu Html Checker (v.Nu)].
 
@@ -107,7 +107,7 @@ metalsmith
 
 ## Options
 
-The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L20-L26) like this:
+The default value for options are [defined](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L20-L26) like this:
 
 ```js
 const chalk = require('chalk'); // chalk@3.0.0
@@ -127,13 +127,13 @@ Pattern are verified using [multimatch v4.0.0][npm-multimatch-used].
 
 [npm-multimatch-used]: https://www.npmjs.com/package/multimatch/v/4.0.0
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L22)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L22)):
 
 ```js
 ['**/*.{html,htm}']
 ```
 
-Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L7)):
+Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L7)):
 
 ```ts
 string | string[]
@@ -143,13 +143,13 @@ string | string[]
 
 Specify a logger function to process the validator result.
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L23)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L23)):
 
 ```js
 console.error
 ```
 
-Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L8)):
+Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L8)):
 
 ```ts
 (str: string) => void
@@ -162,7 +162,7 @@ When `false` or `null` is specified, coloring is disabled.
 
 [npm-chalk-used]: https://www.npmjs.com/package/chalk/v/3.0.0
 
-Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L25)):
+Default value ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L25)):
 
 ```js
 const chalk = require('chalk'); // chalk@3.0.0
@@ -170,7 +170,7 @@ const chalk = require('chalk'); // chalk@3.0.0
 chalk.stderr
 ```
 
-Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.0/src/options.ts#L9)):
+Type definition ([source](https://github.com/sounisi5011/metalsmith-html-validator/blob/v1.1.1/src/options.ts#L9)):
 
 ```ts
 // import chalk = require('chalk'); // chalk@3.0.0

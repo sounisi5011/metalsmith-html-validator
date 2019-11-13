@@ -2,6 +2,10 @@
 
 ## [Unreleased]
 
+[Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.1...master
+
+## [1.1.1] (2019-11-13 UTC)
+
 ### Features
 
 * [#29] - Support Windows
@@ -66,7 +70,7 @@
 
 * [#28] - Migrate from Travis CI to Azure Pipelines
 
-[Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...HEAD
+[1.1.1]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.0...v1.1.1
 [#11]: https://github.com/sounisi5011/metalsmith-html-validator/pull/11
 [#12]: https://github.com/sounisi5011/metalsmith-html-validator/pull/12
 [#14]: https://github.com/sounisi5011/metalsmith-html-validator/pull/14
