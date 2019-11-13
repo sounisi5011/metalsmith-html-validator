@@ -1,10 +1,10 @@
 # metalsmith-html-validator
 
-[![npm package](https://img.shields.io/npm/v/metalsmith-html-validator.svg)][npm]
+[![Go to the latest release page on npm](https://img.shields.io/npm/v/metalsmith-html-validator.svg)](https://www.npmjs.com/package/metalsmith-html-validator)
 [![License: MIT](https://img.shields.io/static/v1?label=license&message=MIT&color=green)][github-license]
-![Supported Node version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
-![Type Definitions: TypeScript](https://img.shields.io/npm/types/metalsmith-html-validator.svg)
-[![bundle size](https://badgen.net/bundlephobia/min/metalsmith-html-validator@1.1.1)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.1)
+![Supported Node.js version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
+![Type Definitions: TypeScript](https://img.shields.io/static/v1?label=types&message=TypeScript&color=blue)
+[![bundle size](https://img.shields.io/bundlephobia/min/metalsmith-html-validator/1.1.1)](https://bundlephobia.com/result?p=metalsmith-html-validator@1.1.1)
 [![Dependencies Status](https://david-dm.org/sounisi5011/metalsmith-html-validator/status.svg)](https://david-dm.org/sounisi5011/metalsmith-html-validator)
 [![Build Status](https://dev.azure.com/sounisi5011/npm%20projects/_apis/build/status/sounisi5011.metalsmith-html-validator?branchName=master)](https://dev.azure.com/sounisi5011/npm%20projects/_build/latest?definitionId=3&branchName=master)
 [![Maintainability Status](https://api.codeclimate.com/v1/badges/3fdd1f208cb3fb05faac/maintainability)](https://codeclimate.com/github/sounisi5011/metalsmith-html-validator/maintainability)
