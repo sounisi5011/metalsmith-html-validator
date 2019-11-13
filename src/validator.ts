@@ -104,10 +104,7 @@ export async function validateFiles(
     data.messages.forEach(message => {
         const { url } = message;
         if (url) {
-            if (/^file:/.test(url)) {
-                const filepath = fileURLToPath(url);
-                filenameMap.set(message, path.relative(tmpDir, filepath));
-            }
+            filenameMap.set(message, path.relative(tmpDir, fileURLToPath(url)));
         }
     });
 
