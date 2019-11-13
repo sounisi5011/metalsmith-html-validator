@@ -1,6 +1,6 @@
 # metalsmith-html-validator
 
-[![Go to the latest release page on npm](https://img.shields.io/npm/v/metalsmith-html-validator.svg)](https://www.npmjs.com/package/metalsmith-html-validator)
+[![Go to the latest release page on npm](https://img.shields.io/npm/v/metalsmith-html-validator.svg)][npm]
 [![License: MIT](https://img.shields.io/static/v1?label=license&message=MIT&color=green)][github-license]
 ![Supported Node.js version: >=8.3.0](https://img.shields.io/static/v1?label=node&message=%3E%3D8.3.0&color=brightgreen)
 ![Type Definitions: TypeScript](https://img.shields.io/static/v1?label=types&message=TypeScript&color=blue)
