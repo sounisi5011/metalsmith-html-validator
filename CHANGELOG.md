@@ -2,7 +2,12 @@
 
 ## [Unreleased]
 
+### Others
+
+* [#40] - Renovate package groups
+
 [Unreleased]: https://github.com/sounisi5011/metalsmith-html-validator/compare/v1.1.1...master
+[#40]: https://github.com/sounisi5011/metalsmith-html-validator/pull/40
 
 ## [1.1.1] (2019-11-13 UTC)
 
