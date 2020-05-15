@@ -117,7 +117,7 @@
   },
   "devDependencies": {
     "@sounisi5011/check-peer-deps": "github:sounisi5011/check-peer-deps",
-    "@types/cross-spawn": "6.0.1",
+    "@types/cross-spawn": "6.0.2",
     "@types/debug": "4.1.5",
     "@types/deep-freeze-strict": "1.1.0",
     "@types/has-ansi": "3.0.0",
