@@ -113,7 +113,7 @@
     "shell-escape": "0.2.0",
     "signal-exit": "3.0.2",
     "tmp": "0.1.0",
-    "vnu-jar": "19.9.4"
+    "vnu-jar": "20.6.30"
   },
   "devDependencies": {
     "@sounisi5011/check-peer-deps": "github:sounisi5011/check-peer-deps",
