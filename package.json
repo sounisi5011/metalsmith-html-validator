@@ -101,7 +101,7 @@
   },
   "dependencies": {
     "@types/metalsmith": "2.3.0",
-    "@types/rimraf": "2.0.3",
+    "@types/rimraf": "2.0.5",
     "@types/tmp": "0.1.0",
     "chalk": "3.0.0",
     "cross-spawn": "7.0.1",
