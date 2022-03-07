@@ -102,7 +102,7 @@
   "dependencies": {
     "@types/metalsmith": "2.3.0",
     "@types/rimraf": "2.0.3",
-    "@types/tmp": "0.1.0",
+    "@types/tmp": "0.2.3",
     "chalk": "3.0.0",
     "cross-spawn": "7.0.1",
     "debug": "4.1.1",
@@ -112,7 +112,7 @@
     "rimraf": "3.0.0",
     "shell-escape": "0.2.0",
     "signal-exit": "3.0.2",
-    "tmp": "0.1.0",
+    "tmp": "0.2.1",
     "vnu-jar": "19.9.4"
   },
   "devDependencies": {
