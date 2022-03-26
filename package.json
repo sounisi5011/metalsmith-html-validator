@@ -105,7 +105,7 @@
     "@types/tmp": "0.1.0",
     "chalk": "3.0.0",
     "cross-spawn": "7.0.1",
-    "debug": "4.1.1",
+    "debug": "4.3.4",
     "deep-freeze-strict": "1.1.1",
     "file-uri-to-path": "2.0.0",
     "multimatch": "4.0.0",
@@ -118,7 +118,7 @@
   "devDependencies": {
     "@sounisi5011/check-peer-deps": "github:sounisi5011/check-peer-deps",
     "@types/cross-spawn": "6.0.1",
-    "@types/debug": "4.1.5",
+    "@types/debug": "4.1.7",
     "@types/deep-freeze-strict": "1.1.0",
     "@types/has-ansi": "3.0.0",
     "@types/lodash.clonedeep": "4.5.6",
